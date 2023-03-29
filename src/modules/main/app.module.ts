@@ -9,6 +9,7 @@ import { AuthModule } from '../auth';
 import { PageModule } from '../page';
 import { FileModule } from '../file/file.module';
 import { ContactModule } from '../contact/contact.module';
+import { ProjectModule } from '../project/project.module';
 
 @Module({
   imports: [
@@ -38,6 +39,7 @@ import { ContactModule } from '../contact/contact.module';
     PageModule,
     FileModule,
     ContactModule,
+    ProjectModule,
     CommonModule,
   ],
   controllers: [AppController],
