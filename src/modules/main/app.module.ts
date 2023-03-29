@@ -6,6 +6,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { MulterModule } from '@nestjs/platform-express';
 import { AuthModule } from '../auth';
+import { PageModule } from '../page';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { AuthModule } from '../auth';
     }),
     ConfigModule,
     AuthModule,
+    PageModule,
     CommonModule,
   ],
   controllers: [AppController],
