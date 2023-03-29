@@ -11,7 +11,7 @@ export class Project {
   title : string
 
   @Column()
-  line : string
+  link : string
 
   @Column()
   stacks : string
