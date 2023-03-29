@@ -13,4 +13,7 @@ export class UpdatePagePayload {
 
   @ApiPropertyOptional()
   name : string
+
+  @ApiPropertyOptional()
+  parentId : number
 }

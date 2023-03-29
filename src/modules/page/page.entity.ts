@@ -8,6 +8,9 @@ export class Page {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @Column()
+  parentId: number;
+
   @Column({ nullable: false })
   name: string;
 

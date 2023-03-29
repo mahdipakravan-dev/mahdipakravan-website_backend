@@ -10,4 +10,7 @@ export class CreatePagePayload {
 
   @ApiPropertyOptional()
   md : string
+
+  @ApiPropertyOptional()
+  parentId : number
 }
