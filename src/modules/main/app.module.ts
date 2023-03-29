@@ -8,6 +8,7 @@ import { MulterModule } from '@nestjs/platform-express';
 import { AuthModule } from '../auth';
 import { PageModule } from '../page';
 import { FileModule } from '../file/file.module';
+import { ContactModule } from '../contact/contact.module';
 
 @Module({
   imports: [
@@ -36,6 +37,7 @@ import { FileModule } from '../file/file.module';
     AuthModule,
     PageModule,
     FileModule,
+    ContactModule,
     CommonModule,
   ],
   controllers: [AppController],
