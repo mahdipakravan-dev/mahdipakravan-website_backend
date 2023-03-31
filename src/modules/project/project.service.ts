@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateProjectPayload } from './payload/create-project.payload';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from '../user';
-import { Like, Repository } from 'typeorm';
+import { Like, Not, Repository } from 'typeorm';
 import { Project } from './project.entity';
 import { FindProjectPayload } from './payload/find-project.payload';
 import { paginate } from 'nestjs-typeorm-paginate';
@@ -29,11 +29,19 @@ export class ProjectService {
   }
 
   async readMany({ stack, ...options }: PaginateProjectPayload) {
-    let where: any = {};
-    if (stack) where.stacks = Like(stack);
-    return paginate<Project>(this.projectRepository, options, {
-      where,
-    });
+    const stacks = stack.split(',');
+    const queries = await Promise.all(
+      stacks.map((qStack) => {
+        return paginate<Project>(this.projectRepository, options, {
+          where: {
+            stacks: Like(qStack),
+          },
+        }).then((res) => res.items);
+      }),
+    );
+    return {
+      items: queries,
+    };
   }
 
   async update({ id, ...edit }: UpdateProjectPayload) {
