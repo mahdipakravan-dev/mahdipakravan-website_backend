@@ -14,15 +14,11 @@ import { FindProjectPayload } from './payload/find-project.payload';
 import { PaginateProjectPayload } from './payload/paginate-project.payload';
 import { UpdateProjectPayload } from './payload/update-project.payload';
 import { DeleteProjectPayload } from './payload/delete-project.payload';
-import { ProjectMockedService } from './project-mock.service';
 
 @Controller('api/project')
 @ApiTags('project')
 export class ProjectController {
-  constructor(
-    private readonly projectService: ProjectService,
-    private readonly projectMockedService: ProjectMockedService,
-  ) {}
+  constructor(private readonly projectService: ProjectService) {}
 
   @Post('create')
   async create(@Body() payload: CreateProjectPayload): Promise<any> {
@@ -47,10 +43,5 @@ export class ProjectController {
   @Delete('delete')
   async delete(@Query() query: DeleteProjectPayload): Promise<any> {
     return await this.projectService.delete(query);
-  }
-
-  @Get('find-projects')
-  async findMockedProject() {
-    return this.projectMockedService.getMockedResponse();
   }
 }
