@@ -1,4 +1,10 @@
-import { Column, Entity, JoinColumn, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { Gallery } from './gallery.entity';
 
 @Entity({
@@ -8,7 +14,7 @@ export class Page {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({nullable : true})
+  @Column({ nullable: true })
   parentId?: number;
 
   @Column({ nullable: false })
@@ -16,6 +22,9 @@ export class Page {
 
   @Column({ nullable: false })
   md: string;
+
+  @Column({ default: false })
+  isDir: boolean;
 
   @OneToMany(() => Gallery, (gallery) => gallery.page)
   @JoinColumn()

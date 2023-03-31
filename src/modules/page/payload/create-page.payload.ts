@@ -6,11 +6,14 @@ export class CreatePagePayload {
     required: true,
   })
   @IsNotEmpty()
-  name : string
+  name: string;
 
   @ApiPropertyOptional()
-  md : string
+  md: string;
 
   @ApiPropertyOptional()
-  parentId : number
+  parentId: number;
+
+  @ApiProperty()
+  isDir: boolean;
 }
