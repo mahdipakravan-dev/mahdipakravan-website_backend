@@ -29,12 +29,19 @@ export class ProjectService {
   }
 
   async readMany({ stack, ...options }: PaginateProjectPayload) {
+    if (!stack) return paginate<Project>(this.projectRepository, options);
     const stacks = stack.split(',');
+    if (stacks.length === 1)
+      return paginate<Project>(this.projectRepository, options, {
+        where: {
+          stacks: Like(`%${stacks[0]}%`),
+        },
+      });
     const queries = await Promise.all(
       stacks.map((qStack) => {
         return paginate<Project>(this.projectRepository, options, {
           where: {
-            stacks: Like(qStack),
+            stacks: Like(`%${qStack}%`),
           },
         }).then((res) => res.items);
       }),
