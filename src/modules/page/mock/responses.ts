@@ -21,6 +21,7 @@ type Response = {
     gallery?: Array<GalleryItem>;
   };
 };
+const byUrl: Record<string, Response> = {};
 class ResponseBuilder {
   private _object?: Response = {
     url: '',
@@ -63,14 +64,14 @@ class ResponseBuilder {
   }
 
   build() {
-    console.log(this._object);
+    byUrl[this._object.url] = this._object;
     return this._object;
   }
 }
 
-export default [
+const array = [
   ResponseBuilder.clone()
-    .setUrl('/api/about?file=me.tsx')
+    .setUrl('me.tsx')
     .setMd(about_md)
     .addGallery({
       src: '/self/2.jpeg',
@@ -94,7 +95,7 @@ export default [
     })
     .build(),
   ResponseBuilder.clone()
-    .setUrl('/api/about?file=KianIranian_iGap')
+    .setUrl('KianIranian_iGap')
     .setMd(kian_md)
     .addGallery({
       src: '/kian/1.jpg',
@@ -118,7 +119,7 @@ export default [
     })
     .build(),
   ResponseBuilder.clone()
-    .setUrl('/api/about?file=Baran')
+    .setUrl('Baran')
     .setMd(baran_md)
     .addGallery({
       src: '/baran/1.jpeg',
@@ -127,7 +128,7 @@ export default [
     })
     .build(),
   ResponseBuilder.clone()
-    .setUrl('/api/about?file=Marcato')
+    .setUrl('Marcato')
     .setMd(marcato_md)
     .addGallery({
       id: 1,
@@ -143,7 +144,7 @@ export default [
     })
     .build(),
   ResponseBuilder.clone()
-    .setUrl('/api/about?file=Parax')
+    .setUrl('Parax')
     .setMd(parax_md)
     .addGallery({
       id: 1,
@@ -153,7 +154,7 @@ export default [
     })
     .build(),
   ResponseBuilder.clone()
-    .setUrl('/api/about?file=MineTaxi')
+    .setUrl('MineTaxi')
     .setMd(mine_md)
     .addGallery({
       src: '/mine/1.jpeg',
@@ -162,7 +163,7 @@ export default [
     })
     .build(),
   ResponseBuilder.clone()
-    .setUrl('/api/about?file=Tavanasho')
+    .setUrl('Tavanasho')
     .setMd(tavanasho_md)
     .addGallery({
       src: '/tavanasho/2.jpg',
@@ -181,3 +182,5 @@ export default [
     })
     .build(),
 ];
+
+export { array, byUrl };

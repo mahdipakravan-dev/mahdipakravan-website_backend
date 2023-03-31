@@ -13,7 +13,8 @@ import { CreatePagePayload } from './payload/create-page.payload';
 import { Page } from './page.entity';
 import { UpdatePagePayload } from './payload/update-page.payload';
 import { FindPagePayload } from './payload/find-page.payload';
-import responses from './mock/responses';
+import { array, byUrl } from './mock/responses';
+import { FindPageMockedPayload } from './payload/find-page-mocked.payload';
 
 @Controller('api/page')
 @ApiTags('page')
@@ -47,6 +48,11 @@ export class PageController {
 
   @Get('findMany-mocked')
   findMocked() {
-    return responses;
+    return array;
+  }
+
+  @Get('findOne-mocked')
+  findOneMocked(@Query() query: FindPageMockedPayload) {
+    return byUrl[query.file];
   }
 }
