@@ -29,10 +29,10 @@ export class ProjectService {
   }
 
   async readMany({ stack, ...options }: PaginateProjectPayload) {
+    let where: any = {};
+    if (stack) where.stacks = Like(stack);
     return paginate<Project>(this.projectRepository, options, {
-      where: {
-        stacks: Like(stack),
-      },
+      where,
     });
   }
 
