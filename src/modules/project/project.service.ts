@@ -46,8 +46,10 @@ export class ProjectService {
         }).then((res) => res.items);
       }),
     );
+    const finalArray = [];
+    queries.map((arr) => arr.forEach((item) => finalArray.push(item)));
     return {
-      items: queries,
+      items: finalArray,
     };
   }
 
