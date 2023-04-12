@@ -11,10 +11,15 @@ export class ContactService {
     private readonly contactRepository: Repository<Contact>,
   ) {}
 
-  async create(payload : CreateContactPayload) {
+  async create(payload: CreateContactPayload) {
     return this.contactRepository.save(
       this.contactRepository.create({
         ...payload,
-      }))
+      }),
+    );
+  }
+
+  async find() {
+    return this.contactRepository.find();
   }
 }
